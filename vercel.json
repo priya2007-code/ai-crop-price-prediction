@@ -3,8 +3,8 @@
   "functions": {
     "backend/main.py": {
       "maxDuration": 60,
-      "includeFiles": "{models/**,data/deployment_data.csv}",
-      "excludeFiles": "{.venv/**,venv/**,node_modules/**,frontend/node_modules/**,frontend/src/**,frontend/public/**,frontend/package*.json,frontend/vite.config.js,frontend/.oxlintrc.json,tests/**,test_*.py,**/__pycache__/**,**/*.pyc,**/.pytest_cache/**}"
+      "includeFiles": "{models/xgboost_crop_price_model.pkl,models/crop_price_preprocessor.pkl,data/deployment_data.csv}",
+      "excludeFiles": "{.git/**,.venv/**,venv/**,**/node_modules/**,frontend/src/**,frontend/public/**,frontend/package*.json,frontend/vite.config.js,frontend/.oxlintrc.json,frontend/dist/**,tests/**,test_*.py,**/test_*.py,notebooks/**,**/*.ipynb,training/**,train/**,scripts/**,data/raw/**,data/processed/**,data/training/**,data/archive/**,**/*.parquet,**/*.xlsx,**/__pycache__/**,**/*.pyc,**/.pytest_cache/**,**/.mypy_cache/**,**/.ruff_cache/**,README*,**/*.md,**/*.rst}"
     }
   }
 }

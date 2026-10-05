@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000'
+const API_BASE = import.meta.env.VITE_API_BASE ?? ''
 const FILTERS = ['state_name', 'district_name', 'market_center_name', 'commodity_name', 'variety', 'grade']
 const LABELS = ['State', 'District', 'Market', 'Commodity', 'Variety', 'Grade']
 const OPTION_KEYS = ['states', 'districts', 'markets', 'commodities', 'varieties', 'grades']

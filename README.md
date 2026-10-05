@@ -93,6 +93,27 @@ npm run dev
 
 ---
 
+## Vercel Deployment
+
+Import this repository into Vercel and keep the project root set to the repository root (not `frontend/`). The root `pyproject.toml` selects the existing FastAPI app at `backend.main:app`, builds the React/Vite frontend, and enables Vercel's FastAPI static frontend integration. `.python-version` selects Python 3.12, and the root requirements pin scikit-learn 1.6.1 and XGBoost 1.7.6 for the existing serialized artifacts. The built frontend is served at `/`; `/health` and `/api/*` continue to use the FastAPI backend on the same origin.
+
+Leave `VITE_API_BASE` unset for the standard single-domain deployment. Set it only when intentionally using a separately hosted API, including that API's origin and `/` if required by its routing. Local Vite development proxies `/health` and `/api` to `http://127.0.0.1:8000`.
+
+The deployment uses the existing `models/` pickle artifacts and `data/deployment_data.csv`; no model or data fallback is configured. The Python function loads the artifacts from those project-root-relative paths at startup. Vercel may need sufficient function memory and startup duration for the 75 MB CSV and scientific Python dependencies. Review deployment build/function logs if Vercel reports a bundle, memory, or startup limit.
+
+To test the frontend production build locally:
+
+```bash
+cd frontend
+npm ci
+npm run build
+npm run preview
+```
+
+Run FastAPI separately on port 8000 while using Vite locally; the Vite dev and preview proxies forward API calls to it.
+
+---
+
 ## 📡 Backend Endpoints
 
 | Endpoint | Method | Description |

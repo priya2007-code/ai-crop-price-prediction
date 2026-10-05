@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Query
@@ -161,15 +162,20 @@ def market_outlook(
         raise HTTPException(status_code=503, detail=str(exc)) from exc
 
 
-@app.get("/")
-def root() -> dict[str, str]:
-    return {
-        "message": "Crop Price Prediction API",
-        "health": "/health",
-        "options": "/api/options",
-        "predict": "/api/predict",
-        "history": "/api/history",
-        "markets": "/api/markets",
-        "market_outlook": "/api/market-outlook",
-    }
+frontend_directory = Path(__file__).resolve().parents[1] / "frontend" / "dist"
+frontend_mount = getattr(app, "frontend", None)
+if callable(frontend_mount) and frontend_directory.is_dir():
+    frontend_mount("/", directory=str(frontend_directory))
+else:
+    @app.get("/")
+    def root() -> dict[str, str]:
+        return {
+            "message": "Crop Price Prediction API",
+            "health": "/health",
+            "options": "/api/options",
+            "predict": "/api/predict",
+            "history": "/api/history",
+            "markets": "/api/markets",
+            "market_outlook": "/api/market-outlook",
+        }
 

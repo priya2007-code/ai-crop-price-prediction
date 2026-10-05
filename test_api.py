@@ -14,6 +14,8 @@ def run_tests():
         print("Status:", r.status_code)
         print("Health response:", r.json())
         assert r.status_code == 200
+        assert client.get("/api/options").status_code == 200
+        assert client.get("/health").json()["status"] == "ok"
 
         print("\n=== TEST 2: GET /api/options ===")
         r = client.get("/api/options")
