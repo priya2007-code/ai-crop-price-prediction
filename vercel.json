@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "backend/main.py": {
+      "maxDuration": 60,
+      "includeFiles": "{models/**,data/deployment_data.csv}",
+      "excludeFiles": "{.venv/**,venv/**,node_modules/**,frontend/node_modules/**,frontend/src/**,frontend/public/**,frontend/package*.json,frontend/vite.config.js,frontend/.oxlintrc.json,tests/**,test_*.py,**/__pycache__/**,**/*.pyc,**/.pytest_cache/**}"
+    }
+  }
+}
